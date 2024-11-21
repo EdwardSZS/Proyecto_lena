@@ -25,7 +25,7 @@ def create_remote_driver():
     options.add_argument("--headless")
     return webdriver.Remote(command_executor=remote_url, desired_capabilities=capabilities, options=options)
 
-driver = create_remote_driver())
+driver = create_remote_driver()
 def scrape_status(guide_number):
     url = f"https://www.deprisa.com//Tracking/?track={guide_number}"  # Cambia la URL según tus necesidades
     driver.get(url)
