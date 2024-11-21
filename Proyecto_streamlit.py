@@ -8,13 +8,22 @@ from datetime import datetime
 import time
 import io
 
-driver = webdriver.Chrome()  # Asegúrate de tener el controlador Chrome o usa el de tu navegador preferido
+#driver = webdriver.Chrome()  # Asegúrate de tener el controlador Chrome o usa el de tu navegador preferido
 states= []
 delivery_dates=[]
 incidents_desc=[]
 incidents_date =[]
 # Función para construir la URL e iniciar el scraping
+def create_headless_driver():
+    options = Options()
+    options.add_argument("--headless")  # Run in headless mode
+    options.add_argument("--disable-gpu")  # Disable GPU acceleration
+    options.add_argument("--no-sandbox")  # Bypass OS security model
+    options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+    driver = webdriver.Chrome(options=options)
+    return driver
 
+driver = create_headless_driver()
 def scrape_status(guide_number):
     url = f"https://www.deprisa.com//Tracking/?track={guide_number}"  # Cambia la URL según tus necesidades
     driver.get(url)
