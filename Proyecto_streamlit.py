@@ -20,22 +20,11 @@ incidents_date =[]
 
 
 
-def get_driver():
+
     # Automatically download the correct ChromeDriver version
-    chromedriver_autoinstaller.install()
+chromedriver_autoinstaller.install()
 
-    from selenium.webdriver.chrome.service import Service
-    from selenium.webdriver.chrome.options import Options
-
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    
-    service = Service()  # Service initialized automatically by chromedriver_autoinstaller
-    return webdriver.Chrome(service=service, options=chrome_options)
-
-driver = get_driver()
+driver = webdriver.Chrome()
 def scrape_status(guide_number):
     url = f"https://www.deprisa.com//Tracking/?track={guide_number}"  # Cambia la URL según tus necesidades
     driver.get(url)
