@@ -3,13 +3,14 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+import chromedriver_autoinstaller
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import time
 import io
-
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 #driver = webdriver.Chrome()  # Asegúrate de tener el controlador Chrome o usa el de tu navegador preferido
 states= []
 delivery_dates=[]
@@ -17,14 +18,21 @@ incidents_desc=[]
 incidents_date =[]
 # Función para construir la URL e iniciar el scraping
 
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 
 def get_driver():
+    # Automatically download the correct ChromeDriver version
+    chromedriver_autoinstaller.install()
+
+    from selenium.webdriver.chrome.service import Service
+    from selenium.webdriver.chrome.options import Options
+
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    service = Service()
+    
+    service = Service()  # Service initialized automatically by chromedriver_autoinstaller
     return webdriver.Chrome(service=service, options=chrome_options)
 
 driver = get_driver()
