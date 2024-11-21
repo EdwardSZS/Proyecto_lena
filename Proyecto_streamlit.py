@@ -19,10 +19,10 @@ incidents_date =[]
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 def create_remote_driver():
-    remote_url = "http://localhost:4444"
-    capabilities = DesiredCapabilities.CHROME
+    remote_url = "http://localhost:4444"  # Use the base URL of Selenium Grid
+    capabilities = DesiredCapabilities.CHROME.copy()
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    options.add_argument("--headless")  # Run in headless mode
     return webdriver.Remote(command_executor=remote_url, desired_capabilities=capabilities, options=options)
 
 driver = create_remote_driver()
