@@ -19,7 +19,7 @@ incidents_date =[]
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 def create_remote_driver():
-    remote_url = "http://localhost:4444/ui"
+    remote_url = "http://localhost:4444"
     capabilities = DesiredCapabilities.CHROME
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
