@@ -21,14 +21,14 @@ incidents_date =[]
 # Función para construir la URL e iniciar el scraping
 
 def get_driver():
-    chromedriver_autoinstaller.install()  # Auto-download the correct ChromeDriver
+      # Auto-download the correct ChromeDriver
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    service = Service()
-    return webdriver.Chrome(service=service, options=chrome_options)
+    
+    return webdriver.Chrome( options=chrome_options)
 
 driver = get_driver()
 
