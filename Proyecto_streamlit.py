@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,14 +19,15 @@ incidents_date =[]
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-def create_remote_driver():
-    remote_url = "http://localhost:4444"  # Use the base URL of Selenium Grid
-    capabilities = DesiredCapabilities.CHROME.copy()
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run in headless mode
-    return webdriver.Remote(command_executor=remote_url, desired_capabilities=capabilities, options=options)
+def get_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    service = Service()
+    return webdriver.Chrome(service=service, options=chrome_options)
 
-driver = create_remote_driver()
+driver = get_driver()
 def scrape_status(guide_number):
     url = f"https://www.deprisa.com//Tracking/?track={guide_number}"  # Cambia la URL según tus necesidades
     driver.get(url)
